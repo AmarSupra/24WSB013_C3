@@ -1,1 +1,8 @@
+In this file all the component tests can be found.
+
+As of this being written there are tests for:
+  Servos (to drive and rotate)
+  QTI sensors (taking readings)
+
+DISCLAIMER: Please check pin assignments before running
 
