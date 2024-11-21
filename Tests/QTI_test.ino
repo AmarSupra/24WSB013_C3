@@ -1,8 +1,8 @@
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println(GetColour(4));
-  Serial.println(GetColour(2));
+  Serial.println(RCTime(4));
+  Serial.println(RCTime(2));
 
 }
 
