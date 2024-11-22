@@ -16,6 +16,9 @@ void loop()                                  // Main loop auto-repeats
 
 }
 
+//1700 = counterclockwise
+//1300 = clockwise
+//1500 = stop
 
 void Forward(int distance){
   servoLeft.attach(13);                      // Attach left signal to pin 13
@@ -30,7 +33,7 @@ void Forward(int distance){
 void Reverse(int distance){
   servoLeft.attach(13);                      // Attach left signal to pin 13
   servoRight.attach(12);                     // Attach right signal to pin 12 
-  servoLeft.writeMicroseconds(1300);         // Left wheel clockwise
+  servoLeft.writeMicroseconds(1375);         // Left wheel clockwise
   servoRight.writeMicroseconds(1700);        // Right wheel counterclockwise
   delay(distance);                           // Control distance moved
   servoLeft.detach();
@@ -40,7 +43,7 @@ void Reverse(int distance){
 void RotateLeft(int angle){
   servoLeft.attach(13);                      // Attach left signal to pin 13
   servoRight.attach(12);                     // Attach right signal to pin 12
-  servoLeft.writeMicroseconds(1300);         // Left wheel clockwise
+  servoLeft.writeMicroseconds(1375);         // Left wheel clockwise
   servoRight.writeMicroseconds(1300);        // Right wheel clockwise
   delay(angle);                              // Control angle of rotation
   servoLeft.detach();
@@ -50,7 +53,7 @@ void RotateLeft(int angle){
 void RotateRight(int angle){
   servoLeft.attach(13);                      // Attach left signal to pin 13
   servoRight.attach(12);                     // Attach right signal to pin 12
-  servoLeft.writeMicroseconds(1700);         // Left wheel counterclockwise
+  servoLeft.writeMicroseconds(1625);         // Left wheel counterclockwise
   servoRight.writeMicroseconds(1700);        // Right wheel counterclockwise
   delay(angle);                              // Control angle of rotation
   servoLeft.detach();
