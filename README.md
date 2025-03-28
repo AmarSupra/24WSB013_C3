@@ -6,4 +6,4 @@
  
  Components test files are denoted with a [component]_test name.
  
- The main running file is the LineFollower.ino file
+ The main running file is the PathPilot.ino file
