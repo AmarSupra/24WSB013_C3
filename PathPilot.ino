@@ -26,6 +26,10 @@ SoftwareSerial BarcodeSerial(7, 8);          // Declare up serial for barcode se
 int QTILeft = 4;                             // Attach left QTI sensor to pin 4
 int QTIRight = 2;                            // Attach right QTI sensor to pin 2
 
+int RedPin = 9;                              // LED pins R9 G10 B11 
+int GreenPin = 10; 
+int BluePin = 11; 
+
 rgb_lcd lcd;                                 // Declare LCD
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,8 +48,15 @@ void setup()
 
   lcd.begin(16, 2);                          // Setup LCD columns, rows and colour
   lcd.setRGB(255, 0, 0);
+  LCDUpdate("Line Following");
 
-  LCDUpdate(Line Following);
+
+  pinMode(RedPin, OUTPUT);                   // Setup RGB pins
+  pinMode(GreenPin, OUTPUT);
+  pinMode(BluePin, OUTPUT);
+
+  setColor(255, 0,0);                        // LED is red until task finishes
+
 }  
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,12 +74,13 @@ void loop()
 
   if (BarcodeNumber != "")                                          // Barcode has been scanned - run final code
   {
+    setColor(0,0,255);                                              // Bue when reading barcode 
     LCDUpdate(BarcodeNumber);                                       // Output barcode number
 
-    Forward(1000);                                                  // Drive over barcode to finish
+    Forward(5000);                                                  // Drive over barcode to finish
     lcd.setCursor(0,1);                                             // Update LCD to show current status
     lcd.print("TASK COMPLETE");
-    RotateRight(250);                                               // Dance ?
+    setColor(0, 255, 0);                                            // Green when finished 
     while (1 == 1){}                                                // Infinite loop does nothing - Job is complete
   }
   
@@ -220,3 +232,9 @@ void SeekRight(int LeftColour, int RightColour, int LeftPin, int RightPin){
   }
 }
 
+// Used to set the colour of the RGB LED
+void setColor(int redValue, int greenValue, int blueValue) {
+  analogWrite(RedPin, redValue);
+  analogWrite(GreenPin, greenValue);
+  analogWrite(BluePin, blueValue);
+}
