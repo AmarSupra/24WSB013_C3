@@ -4,6 +4,6 @@
 
  This repository contains files to control an Arduino shield bot by following a line using QTI sensors and then read a barcode afterwards.
  
- Components test files are denoted with a [component]_test name.
+ Components test files are in the Tests folder
  
  The main running file is the PathPilot.ino file
