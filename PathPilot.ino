@@ -144,6 +144,7 @@ long RCTime(int sensorIn){
 }
 
 // The GetColour function converts the QTI reading to a white or black value
+// ADJUST VALUES DEPENDING ON READINGS
 int GetColour(int QTIPin){
   long Reading = RCTime(QTIPin);
   if (Reading < 200){                                            // Values for comparison should be adjusted based off of readings
