@@ -23,8 +23,8 @@ Servo servoRight;
 
 SoftwareSerial BarcodeSerial(7, 8);          // Declare up serial for barcode sensor, Recieves on pin 7 (RX), Transmits on pin 8 (TX)
 
-int QTILeft = 4;                             // Attach left QTI sensor to pin 4
-int QTIRight = 2;                            // Attach right QTI sensor to pin 2
+int QTILeft = 3;                             // Attach left QTI sensor to pin 4
+int QTIRight = 4;                            // Attach right QTI sensor to pin 2
 
 int RedPin = 9;                              // LED pins R9 G10 B11 
 int GreenPin = 10; 
@@ -72,12 +72,17 @@ void loop()
     BarcodeNumber = BarcodeSerial.readStringUntil('\n');            // Read barcode number from serial output
   }
 
+  if (millis() < 60000)
+  {
+    BarcodeNumber = "";
+  }
+
   if (BarcodeNumber != "")                                          // Barcode has been scanned - run final code
   {
-    setColor(0,0,255);                                              // Bue when reading barcode 
+    setColor(0,0,255);                                              // Blue when reading barcode 
     LCDUpdate(BarcodeNumber);                                       // Output barcode number
 
-    Forward(5000);                                                  // Drive over barcode to finish
+    Forward(4500);                                                  // Drive over barcode to finish
     lcd.setCursor(0,1);                                             // Update LCD to show current status
     lcd.print("TASK COMPLETE");
     setColor(0, 255, 0);                                            // Green when finished 
@@ -147,10 +152,10 @@ long RCTime(int sensorIn){
 // ADJUST VALUES DEPENDING ON READINGS
 int GetColour(int QTIPin){
   long Reading = RCTime(QTIPin);
-  if (Reading < 200){                                            // Values for comparison should be adjusted based off of readings
+  if (Reading < 100){                                            // Values for comparison should be adjusted based off of readings
     return 0;                                                    // White = 0
   }
-  if (Reading > 200){
+  if (Reading > 100){
     return 1;                                                    // Black = 0
   }
 }
@@ -171,7 +176,7 @@ void LCDUpdate(String Message){
 void Forward(int distance){
   servoLeft.attach(13);                      // Attach left signal to pin 13
   servoRight.attach(12);                     // Attach right signal to pin 12
-  servoLeft.writeMicroseconds(1625);         // Left wheel anticlockwise
+  servoLeft.writeMicroseconds(1580);         // Left wheel anticlockwise
   servoRight.writeMicroseconds(1300);        // Right wheel clockwise
   delay(distance);                           // Control distance moved
   servoLeft.detach();
